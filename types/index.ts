@@ -11,8 +11,8 @@ export interface CustomButtonProps{
 }
 
 export interface SearchManufacturerProps{
-    manufacturer: string;
-    setManufacturer: (manufacturer: string) => void;
+    selected: string;
+    setSelected: (manufacturer: string) => void;
 }
 
 export interface CarCardProps{
@@ -66,4 +66,11 @@ export interface OptionsProps{
 export interface CustomFilterProps{
     title:string;
     options: OptionsProps[];
+    setFilter: (Event: number | string)=>void
 }
+export interface ShowMoreProps{
+    pageNumber: number;
+    isNext: boolean;
+    setLimit: (newLimit:number)=>void;
+}
+

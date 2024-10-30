@@ -5,14 +5,14 @@ import { useState, Fragment } from 'react'
 import Image from 'next/image'
 import { manufacturers } from '@/constants'
 
-const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturerProps) => {
+const SearchManufacturer = ({selected, setSelected} : SearchManufacturerProps) => {
     const [query, setQuery] = useState("")
     const filteredManufacturers = query === "" ? manufacturers : manufacturers.filter((item)=>(
         item.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
     ))
   return (
     <div className='search-manufacturer'>
-        <Combobox value={manufacturer} onChange={setManufacturer}>
+        <Combobox value={selected} onChange={setSelected}>
             <div className="relative w-full">
                 <ComboboxButton className='absolute top-[14px]'>
                 <Image 
