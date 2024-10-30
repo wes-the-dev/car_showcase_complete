@@ -1,7 +1,7 @@
 "use client"
 import { CarCardProps } from '@/types'
 import CustomButton from './CustomButton'
-import { calculateCarRent } from '@/utils'
+import { calculateCarRent, generateCarUrl } from '@/utils'
 import Image from 'next/image'
 import { useState } from 'react'
 import CarDetails from './CarDetails'
@@ -25,7 +25,7 @@ const [isOpen, setIsOpen] = useState(false)
                 <span className='self-end text-[14px] font-medium'>/day</span>
             </p>
             <div className="relative w-full h-40 my-3 object-contain">
-                <Image src='/hero.png' alt='car model' fill priority className='object-contain' />
+                <Image src={generateCarUrl(car)} alt='car model' fill priority className='object-contain' />
             </div>
             <div className="relative flex w-full mt-2">
                 <div className="flex group-hover:invisible w-full justify-between text-gray">
