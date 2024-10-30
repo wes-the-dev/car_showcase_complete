@@ -1,11 +1,12 @@
-
-export async function fetchCars(){
+import { FilterProps } from "@/types";
+export async function fetchCars(filters: FilterProps){
+    const {manufacturer, year, model, limit, fuel} = filters;
     const headers = {     
         'x-rapidapi-key': '5b8015963amsh2e46bf11c920b2ap1f4d5ejsn67fe18c48057',
         'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com'
         
     }
-    const response = await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=Porsche', {
+    const response = await fetch(`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`, {
         headers: headers
     });
     const result = await response.json()
@@ -40,7 +41,7 @@ export const generateCarUrl = (car: {
         model: string;
         transmission: string;
         year: number   
-}, angle?:string) =>{
+    }, angle?:string) =>{
     const url = new URL('https://cdn.imagin.studio/getimage');
     const {make, year, model} = car;
     url.searchParams.append('customer', `${process.env.NEXT_PUBLIC_KEY}`);
@@ -53,3 +54,10 @@ export const generateCarUrl = (car: {
     return `${url}`;
 }
 
+export const updateSearchParams =(type:string, value:string)=>{
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set(type, value)
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`
+
+    return newPathname;
+}
